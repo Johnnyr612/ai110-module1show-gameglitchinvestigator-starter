@@ -18,16 +18,6 @@ def test_guess_too_low():
     assert outcome == "Too Low"
     assert message == "📈 Go HIGHER!"
 
-def test_hint_direction_matches_guess_relation():
-    # Regression test for the reversed hint bug.
-    too_high_outcome, too_high_message = check_guess(60, 50)
-    assert too_high_outcome == "Too High"
-    assert too_high_message == "📉 Go LOWER!"
-
-    too_low_outcome, too_low_message = check_guess(40, 50)
-    assert too_low_outcome == "Too Low"
-    assert too_low_message == "📈 Go HIGHER!"
-
 
 def test_create_new_game_state_resets_values():
     # Regression test for the new game button reset behavior.

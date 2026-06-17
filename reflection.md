@@ -39,15 +39,20 @@ I dont believe the ai chat bot was incorrect with the prompts I gave it. I was p
 ## 3. Debugging and testing your fixes
 
 - How did you decide whether a bug was really fixed?
+I re-ran 'python -m streamlit run app.py' to see if the bug was actually fixed. I also ran the pytest.
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
+  I asked ai to create me a test case for restarting the game using test_create_new_game_state_resets_values(), it worked.
 - Did AI help you design or understand any tests? How?
+It helped me create test cases in pytest, then I verified they worked by testing using streamlit.
 
 ---
 
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+Streamlit is like a whiteboard that can be wiped clean when ever you interact with buttons. The only way keep important variables
+like the secrete key is to use st.session_state to keep the secret key from being wiped.
 
 ---
 
@@ -55,5 +60,8 @@ I dont believe the ai chat bot was incorrect with the prompts I gave it. I was p
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+  I will definitely be using pytest to test my future programs. I didn't know they were a thing.
 - What is one thing you would do differently next time you work with AI on a coding task?
+I will ask the ai chat bot to first analyze the file(s) then verify if the logic is correct or not.
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+It really makes things move faster than before. Before I would have to double check my code every other few minutes to get the syntax right. Now can produce more code at a faster rate and just fix bugs.

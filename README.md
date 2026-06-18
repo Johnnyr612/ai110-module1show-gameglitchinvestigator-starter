@@ -58,16 +58,16 @@ Describe your fixed game in numbered steps so a reader can follow along without 
 ## 🧪 Test Results
 
 ```
-PS D:\CodePath Forks\Week3-Project1\ai110-module1show-gameglitchinvestigator-starter> python -m pytest tests/test_game_logic.py             
-============================ test session starts ==============================================================================
+PS D:\CodePath Forks\Week3-Project1\ai110-module1show-gameglitchinvestigator-starter> python -m pytest tests/test_game_logic.py
+=========================== test session starts ==============================================================================
 platform win32 -- Python 3.13.3, pytest-9.1.0, pluggy-1.6.0
 rootdir: D:\CodePath Forks\Week3-Project1\ai110-module1show-gameglitchinvestigator-starter
 plugins: anyio-4.12.1, langsmith-0.7.3
-collected 4 items                                                                                                                                                               
+collected 13 items                                                                                                                                                              
 
-tests\test_game_logic.py ....                                                                                                                                             [100%]
+tests\test_game_logic.py .............                                                                                                                                    [100%]
 
-=========================== 4 passed in 0.22s ===============================================================================
+=========================== 13 passed in 0.19s ==============================================================================
 ```
 
 ## 🚀 Stretch Features

@@ -1,4 +1,7 @@
+import json
 import random
+
+HIGH_SCORE_FILE = "high_scores.json"
 
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
@@ -83,3 +86,43 @@ def create_new_game_state(low: int, high: int):
         "status": "playing",
         "history": [],
     }
+
+
+def load_high_scores(path: str = HIGH_SCORE_FILE):
+    """
+    Load the best-score-per-difficulty map from disk.
+
+    Returns an empty dict if the file is missing, unreadable, or corrupt,
+    so a fresh install (or a bad file) never crashes the game.
+    """
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return {}
+
+    if not isinstance(data, dict):
+        return {}
+    return data
+
+
+def update_high_score(scores: dict, difficulty: str, score: int):
+    """
+    Return (updated_scores, is_new_record).
+
+    A new record is set when there is no prior score for the difficulty
+    or the new score is strictly higher than the existing best. The input
+    dict is not mutated.
+    """
+    updated = dict(scores)
+    previous = updated.get(difficulty)
+    if previous is None or score > previous:
+        updated[difficulty] = score
+        return updated, True
+    return updated, False
+
+
+def save_high_scores(scores: dict, path: str = HIGH_SCORE_FILE):
+    """Persist the best-score-per-difficulty map to disk as JSON."""
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(scores, f, indent=2)

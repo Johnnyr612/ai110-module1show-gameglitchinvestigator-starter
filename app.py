@@ -5,7 +5,10 @@ from logic_utils import (
     create_new_game_state,
     get_attempt_limit,
     get_range_for_difficulty,
+    load_high_scores,
     parse_guess,
+    save_high_scores,
+    update_high_score,
     update_score,
 )
 
@@ -28,6 +31,12 @@ low, high = get_range_for_difficulty(difficulty)
 
 st.sidebar.caption(f"Range: {low} to {high}")
 st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
+
+best_score = load_high_scores().get(difficulty)
+st.sidebar.metric(
+    f"🏆 Best score ({difficulty})",
+    best_score if best_score is not None else "—",
+)
 
 if "secret" not in st.session_state:
     for key, value in create_new_game_state(low, high).items():
@@ -107,6 +116,16 @@ if submit:
                 f"You won! The secret was {st.session_state.secret}. "
                 f"Final score: {st.session_state.score}"
             )
+
+            scores, is_record = update_high_score(
+                load_high_scores(), difficulty, st.session_state.score
+            )
+            save_high_scores(scores)
+            if is_record:
+                st.success(
+                    f"🏆 New high score for {difficulty}: "
+                    f"{st.session_state.score}!"
+                )
         else:
             if st.session_state.attempts >= attempt_limit:
                 st.session_state.status = "lost"

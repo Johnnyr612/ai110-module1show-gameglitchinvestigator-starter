@@ -26,27 +26,48 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
+The games purpose is to guess the random secret number ranging from 1-100 or depending on the dificulty.
 - [ ] Detail which bugs you found.
+Two bugs I found include wrong hint direction and 'restart' button malfunction.
 - [ ] Explain what fixes you applied.
+I fixed the logic for the hint direction outputs inside check_guess() method
+```
+if guess > secret:
+        return "Too High", "📉 Go LOWER!"
+    return "Too Low", "📈 Go HIGHER!"
+```
+I also fixed the stremlit issue when pressing the restart game button.
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. I enter 40 in the guess box
+2. Game returns "Go Higher"
+3. I enter 55 in the guess box
+4. Game returns "Go Lower"
+5. I enter 50 in the guess box
+6. Game returns "Go Lower"
+7. I enter 45 in the guess box
+8. Game return "Go Lower"
+9. I enter 42 in the guess box
+10. Game returns Correct! you won!
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
 ## 🧪 Test Results
 
 ```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+PS D:\CodePath Forks\Week3-Project1\ai110-module1show-gameglitchinvestigator-starter> python -m pytest tests/test_game_logic.py             
+============================ test session starts ==============================================================================
+platform win32 -- Python 3.13.3, pytest-9.1.0, pluggy-1.6.0
+rootdir: D:\CodePath Forks\Week3-Project1\ai110-module1show-gameglitchinvestigator-starter
+plugins: anyio-4.12.1, langsmith-0.7.3
+collected 4 items                                                                                                                                                               
+
+tests\test_game_logic.py ....                                                                                                                                             [100%]
+
+=========================== 4 passed in 0.22s ===============================================================================
 ```
 
 ## 🚀 Stretch Features

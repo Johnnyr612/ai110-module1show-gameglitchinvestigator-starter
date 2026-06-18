@@ -26,11 +26,20 @@
 
 > Document how you used AI to help generate or improve tests.
 
-| Edge Case | Prompt Used | AI-Suggested Test | Did It Pass? | Your Reasoning |
+**Prompt(s) used to generate the tests:**
+
+```
+Identify three potential "edge case" inputs (negative numbers, decimals, or
+extremely large values) that might still break my number guessing game, then
+write a pytest case for each against parse_guess() and check_guess() in
+logic_utils.py.
+```
+
+| Edge Case | Prompt Used | AI-Suggested Test | Did It Pass? | Why this edge case was chosen |
 |-----------|-------------|-------------------|--------------|----------------|
-| | | | | |
-| | | | | |
-| | | | | |
+| Negative number (`"-50"`) | (see prompt above) | `test_negative_number_is_accepted_but_out_of_range` | ✅ Yes | A negative guess is parsed as valid even though the secret is always 1-100, so it can never be a real answer — exposes missing range validation. |
+| Decimal (`"50.99"`) | (see prompt above) | `test_decimal_input_is_truncated_not_rounded` | ✅ Yes | `int(float("50.99"))` truncates to 50 instead of rounding to 51, so the player's actual guess silently differs from what they typed. |
+| Extremely large value (`"99999999999999999999"`) | (see prompt above) | `test_extremely_large_value_does_not_crash` | ✅ Yes | Python ints are unbounded, so a giant value must not overflow or crash — it should just be handled gracefully as "Too High". |
 
 ---
 
